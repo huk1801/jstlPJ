@@ -17,7 +17,7 @@
 </head>
 <body>
 <form action="update.me" name="f" method="post" onsubmit="return inputcheck(this)">
-    <input type="hidden" name="picture" value="${s.picture}">
+    <input type="hidden" name="picture" value="${mem.picture}">
     <table>
         <caption>회원정보수정</caption>
         <tr>

@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-url : http://localhost:8090/model2/hello.me<br>
+url : http://localhost:8090/model2/hello.do<br>
 ${hello}
 </body>
 </html>
