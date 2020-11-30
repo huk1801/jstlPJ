@@ -18,7 +18,7 @@
 </head>
 <body>
 <table>
-    <tr><th>아이디</th><td>${fn:substring(id,0,id.length()-2)}**</td></tr>
+    <tr><th>아이디</th><td>${id}**</td></tr>
     <tr><td colspan="2"><input type="button" value="아이디전송" onclick="idsend('${fn:substring(id,0,id.length()-2)}')"></td></tr>
 </table>
 </body>

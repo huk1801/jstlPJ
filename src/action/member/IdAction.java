@@ -22,6 +22,7 @@ public class IdAction implements Action {
             url = "idForm.me";
             request.setAttribute("msg", msg);
             request.setAttribute("url", url);
+            request.setAttribute("id",id.substring(0,id.length()-2));
             return new ActionForward(false,"../alert.jsp");
         }
         return new ActionForward();

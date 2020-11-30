@@ -23,6 +23,7 @@ public class PasswordAction implements Action {
             url = "pwForm.me";
             request.setAttribute("msg", msg);
             request.setAttribute("url", url);
+            request.setAttribute("pass",pass.substring(0,pass.length()-2));
             return new ActionForward(false, "../alert.jsp");
         }
         return new ActionForward();

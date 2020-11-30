@@ -17,14 +17,11 @@ import java.lang.reflect.Method;
 import java.util.Properties;
 
 @WebServlet(urlPatterns = {"*.do"}, initParams = {@WebInitParam(name = "properties", value = "method.properties")})
-
 public class ControllerMethodServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
     private Properties pr = new Properties();
     private BoardAction action = new BoardAction();
     private Class[] paramType = new Class[]{HttpServletRequest.class, HttpServletResponse.class};
-
-    public ControllerMethodServlet(){
+    public ControllerMethodServlet() {
         super();
     }
 
@@ -33,42 +30,47 @@ public class ControllerMethodServlet extends HttpServlet {
         FileInputStream f = null;
         String props = config.getInitParameter("properties");
         try {
-            f = new FileInputStream(config.getServletContext().getRealPath("/")+"WEB-INF/"+props);
+            f = new FileInputStream(config.getServletContext().getRealPath("/") + "WEB-INF/" + props);
             pr.load(f);
             f.close();
-        }catch (IOException e){
+        }catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request, response);
+    }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        Object[] paramObjs = new Object[]{request,response};
+        Object[] paramObjs = new Object[] { request, response};
         ActionForward forward = null;
         String command = null;
         try {
             command = request.getRequestURI().substring(request.getContextPath().length());
+            //methodName : hello
             String methodName = pr.getProperty(command);
+            //action.getClas() : BoardAction의 Class 정보
+            //method : 메서드의 이름이 hello, 파라미터 정보가 request, response인 메서드 리턴
             Method method = action.getClass().getMethod(methodName, paramType);
-            forward = (ActionForward)method.invoke(action,paramObjs);
-        }catch (NullPointerException e){
+            //invoke : 메서드 호출. 실행.
+            forward = (ActionForward)method.invoke(action, paramObjs);
+        } catch (NullPointerException e) {
             forward = new ActionForward();
-        }catch (Exception e){
-            throw  new ServletException(e);
+        } catch (Exception e) {
+            throw new ServletException(e);
         }
-        if (forward != null){
-            if (forward.isRedirect()){
+        if(forward != null) {
+            if(forward.isRedirect()) {
                 response.sendRedirect(forward.getView());
-            }else {
+            } else {
+                if(forward.getView() == null) {
+                    forward.setView(command.replace(".do", ".jsp"));
+                }
                 RequestDispatcher disp = request.getRequestDispatcher(forward.getView());
                 disp.forward(request, response);
             }
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
     }
 }

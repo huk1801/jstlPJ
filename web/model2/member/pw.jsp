@@ -14,7 +14,7 @@
 <table>
     <tr>
         <th>비밀번호</th>
-        <td>${fn:substring(pass,0,pass.length()-2)}**</td>
+        <td>${pw}**</td>
     </tr>
     <tr>
         <td colspan="2"><input type="button" value="닫기"
