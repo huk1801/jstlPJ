@@ -3,5 +3,18 @@
     <decorator name="main" page="layout.jsp">
         <pattern>/model2/*</pattern>
     </decorator>
-    <excludes></excludes>
+    <excludes>
+        <pattern>/model2/member/id*</pattern>
+        <pattern>/model2/member/pw*</pattern>
+        <pattern>/model2/member/picture*</pattern>
+        <pattern>/model2/member/join*</pattern>
+    </excludes>
 </decorators>
+
+<!--
+<decorator name="main" page="memberLayout.jsp">
+<pattern>/model2/member/*</pattern>
+</decorator>
+<decorator name="main" page="boardLayout.jsp">
+<pattern>/model2/board/*</pattern>
+</decorator>-->

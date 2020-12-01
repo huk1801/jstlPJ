@@ -13,7 +13,7 @@
 <html>
 <head>
     <title><decorator:title /></title>
-    <decorator:head/>
+    <decorator:head/>   <%-- <head> 내부의 내용을 추가. <title> 제외--%>
     <link rel="stylesheet" href="${path}/css/main.css">
 </head>
 <body>
@@ -40,7 +40,7 @@
             <a href="${path}/model2/chat/chatForm.do">채팅</a><br>
         </td>
         <td colspan="2" style="text-align: left; vertical-align: top">
-            <decorator:body/>
+            <decorator:body/><%--<body> 태그의 내용이 추가됨.--%>
         </td>
     </tr>
     <tr>
